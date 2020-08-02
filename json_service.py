@@ -36,10 +36,13 @@ def delete_picture():
         person.pop('picture')
 
 
+def get_json():
+    return parsed_json
+
+
 
 
 if __name__ == "__main__":
     add_days_until_birthday()
     sanitize_phone_number()
     delete_picture()
-    print_json()
