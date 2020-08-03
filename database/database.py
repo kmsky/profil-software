@@ -1,7 +1,7 @@
 from peewee import *
-import json_service
+from json_editor import JSONEditor
+from json_creator import JSONCreator
 
-parsed_json = json_service.get_json()
 
 database = SqliteDatabase("persons.db")
 
@@ -108,8 +108,20 @@ def insert_db(json):
 
 
 if __name__ == "__main__":
-    file = json_service.get_json()
 
-    delete_table()
+    # get json from randomuser.me
+    creator = JSONCreator(1000)
+    
+    json = creator.get_json()
+
+    # edit json data
+    editor = JSONEditor(json)
+
+    editor.add_days_until_birthday()
+    editor.sanitize_phone_number()
+    editor.delete_picture()
+    json = editor.get_json()
+
+    # create database
     create_table()
-    insert_db(file)
+    insert_db(json)

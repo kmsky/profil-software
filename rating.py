@@ -1,7 +1,4 @@
-import db_service
 import re
-
-users = db_service.Users
 
 
 def count_points(password):
@@ -43,7 +40,3 @@ def is_longer_than_8(text):
 
 def has_special_char(text):
     return re.search('[^0-9a-zA-Z *]', text)
-
-
-if __name__ == "__main__":
-    count_points("Supertajne1$")

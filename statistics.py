@@ -1,10 +1,8 @@
-import db_service
+import database
 import rating
-from datetime import datetime
-import day_counter
 
-users = db_service.Users
-db = db_service.database
+users = database.Users
+db = database.database
 
 
 def percent_fm():
@@ -85,3 +83,7 @@ def born_between(date1, date2):
 
     for user in chosen:
         print(user.id, user.name_first, user.name_last)
+
+
+if __name__ == "__main__":
+    most_secure_password()
