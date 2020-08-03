@@ -65,46 +65,46 @@ def delete_table():
 
 def insert_db(json):
     for p in json['results']:
-        user = Users(gender=p['gender'],
+        table = Users(gender=p['gender'],
 
-                     name_title=p['name']['title'],
-                     name_first=p['name']['first'],
-                     name_last=p['name']['last'],
+                      name_title=p['name']['title'],
+                      name_first=p['name']['first'],
+                      name_last=p['name']['last'],
 
-                     location_street_number=p['location']['street']['number'],
-                     location_street_name=p['location']['street']['name'],
-                     location_city=p['location']['city'],
-                     location_state=p['location']['state'],
-                     location_country=p['location']['country'],
-                     location_postcode=p['location']['postcode'],
-                     location_coord_latitude=p['location']['coordinates']['latitude'],
-                     location_coord_longitude=p['location']['coordinates']['longitude'],
-                     location_timezone_offset=p['location']['timezone']['offset'],
-                     location_timezone_description=p['location']['timezone']['description'],
-                     email=p['email'],
+                      location_street_number=p['location']['street']['number'],
+                      location_street_name=p['location']['street']['name'],
+                      location_city=p['location']['city'],
+                      location_state=p['location']['state'],
+                      location_country=p['location']['country'],
+                      location_postcode=p['location']['postcode'],
+                      location_coord_latitude=p['location']['coordinates']['latitude'],
+                      location_coord_longitude=p['location']['coordinates']['longitude'],
+                      location_timezone_offset=p['location']['timezone']['offset'],
+                      location_timezone_description=p['location']['timezone']['description'],
+                      email=p['email'],
 
-                     login_uuid=p['login']['uuid'],
-                     login_username=p['login']['username'],
-                     login_password=p['login']['password'],
-                     login_salt=p['login']['salt'],
-                     login_md5=p['login']['md5'],
-                     login_sha1=p['login']['sha1'],
-                     login_sha256=p['login']['sha256'],
+                      login_uuid=p['login']['uuid'],
+                      login_username=p['login']['username'],
+                      login_password=p['login']['password'],
+                      login_salt=p['login']['salt'],
+                      login_md5=p['login']['md5'],
+                      login_sha1=p['login']['sha1'],
+                      login_sha256=p['login']['sha256'],
 
-                     dob_date=p['dob']['date'],
-                     dob_age=p['dob']['age'],
-                     dob_untilbirthday=p['dob']['untilbirthday'],
-                     registered_date=p['registered']['date'],
-                     registered_age=p['registered']['age'],
+                      dob_date=p['dob']['date'],
+                      dob_age=p['dob']['age'],
+                      dob_untilbirthday=p['dob']['untilbirthday'],
+                      registered_date=p['registered']['date'],
+                      registered_age=p['registered']['age'],
 
-                     phone=p['phone'],
-                     cell=p['cell'],
+                      phone=p['phone'],
+                      cell=p['cell'],
 
-                     id_name=p['id']['name'],
-                     id_value=p['id']['value'],
+                      id_name=p['id']['name'],
+                      id_value=p['id']['value'],
 
-                     nat=p['nat'])
-        user.save()
+                      nat=p['nat'])
+        table.save()
 
 
 if __name__ == "__main__":

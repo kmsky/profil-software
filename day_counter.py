@@ -6,8 +6,7 @@ today = datetime.date.today()
 def get_birthday_date(date):
     dt_object = datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%fZ')
     date_object = dt_object.date()
-    birthday = replace_year(date_object, today.year)
-    return birthday
+    return date_object
 
 
 def replace_year(date, year):
@@ -28,6 +27,7 @@ def it_is_this_year(date):
 
 def days_between(date):
     birthday = get_birthday_date(date)
+    birthday = replace_year(birthday, today.year)
 
     if it_is_this_year(birthday):
         return (birthday - today).days

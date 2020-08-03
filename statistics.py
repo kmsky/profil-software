@@ -1,5 +1,7 @@
 import db_service
 import rating
+from datetime import datetime
+import day_counter
 
 users = db_service.Users
 db = db_service.database
@@ -16,22 +18,24 @@ def percent_fm():
     print("Sum: {}, male: {}%, female:{}%".format(both_sexes, male_percent, female_percent))
 
 
-def average_age():
-    cursor = db.execute_sql("SELECT AVG(dob_age) FROM users;")
-    overall_avg = cursor.fetchone()
+def average_age(parameter):
+    if parameter == "male":
+        cursor = db.execute_sql("SELECT AVG(dob_age) FROM users WHERE gender='male'")
+        male_age_avg = cursor.fetchone()
+        print("Male age average: " + str(male_age_avg[0]))
 
-    cursor = db.execute_sql("SELECT AVG(dob_age) FROM users WHERE gender='female'")
-    female_age_avg = cursor.fetchone()
+    elif parameter == "female":
+        cursor = db.execute_sql("SELECT AVG(dob_age) FROM users WHERE gender='female'")
+        female_age_avg = cursor.fetchone()
+        print("Female age average: " + str(female_age_avg[0]))
 
-    cursor = db.execute_sql("SELECT AVG(dob_age) FROM users WHERE gender='male'")
-    male_age_avg = cursor.fetchone()
-
-    print("Overall average: " + str(overall_avg[0]))
-    print("Female age average: " + str(female_age_avg[0]))
-    print("Male age average: " + str(male_age_avg[0]))
+    elif parameter == "overall":
+        cursor = db.execute_sql("SELECT AVG(dob_age) FROM users;")
+        overall_avg = cursor.fetchone()
+        print("Overall average: " + str(overall_avg[0]))
 
 
-def most_popular_cities(n):
+def most_common_cities(n):
     cursor = db.execute_sql("SELECT location_city "
                             "FROM users "
                             "GROUP BY location_city "
@@ -44,7 +48,7 @@ def most_popular_cities(n):
             print(element)
 
 
-def most_popular_password(n):
+def most_common_password(n):
     cursor = db.execute_sql("SELECT login_password "
                             "FROM users "
                             "GROUP BY login_password "
@@ -57,7 +61,7 @@ def most_popular_password(n):
             print(element)
 
 
-def find_best_password():
+def most_secure_password():
     best_pass = ''
     best_score = -1
 
@@ -73,5 +77,11 @@ def find_best_password():
     print("Best password in database: " + best_pass)
 
 
-if __name__ == "__main__":
-    find_best_password()
+def born_between(date1, date2):
+    date1 = date1 + 'T00:00:00.000Z'
+    date2 = date2 + 'T23:59:59.999Z'
+
+    chosen = users.select().where(users.dob_date.between(date1, date2))
+
+    for user in chosen:
+        print(user.id, user.name_first, user.name_last)
