@@ -1,6 +1,5 @@
 from peewee import *
 import json_service
-import re
 
 parsed_json = json_service.get_json()
 
@@ -13,46 +12,47 @@ class BaseModel(Model):
 
 
 class Users(BaseModel):
-    gender = CharField(null=True)
+    gender = CharField()
 
-    name_title = CharField(null=True)
-    name_first = CharField(null=True)
-    name_last = CharField(null=True)
+    name_title = CharField()
+    name_first = CharField()
+    name_last = CharField()
 
-    location_street_number = CharField(null=True)
-    location_street_name = CharField(null=True)
-    location_city = CharField(null=True)
-    location_state = CharField(null=True)
-    location_country = CharField(null=True)
-    location_postcode = CharField(null=True)
-    location_coord_latitude = CharField(null=True)
-    location_coord_longitude = CharField(null=True)
-    location_timezone_offset = CharField(null=True)
-    location_timezone_description = CharField(null=True)
+    location_street_number = CharField()
+    location_street_name = CharField()
+    location_city = CharField()
+    location_state = CharField()
+    location_country = CharField()
+    location_postcode = CharField()
+    location_coord_latitude = CharField()
+    location_coord_longitude = CharField()
+    location_timezone_offset = CharField()
+    location_timezone_description = CharField()
 
-    email = CharField(null=True)
+    email = CharField()
 
-    login_uuid = CharField(null=True)
-    login_username = CharField(null=True)
-    login_password = CharField(null=True)
-    login_salt = CharField(null=True)
-    login_md5 = CharField(null=True)
-    login_sha1 = CharField(null=True)
-    login_sha256 = CharField(null=True)
+    login_uuid = CharField()
+    login_username = CharField()
+    login_password = CharField()
+    login_salt = CharField()
+    login_md5 = CharField()
+    login_sha1 = CharField()
+    login_sha256 = CharField()
 
-    dob_date = CharField(null=True)
-    dob_age = CharField(null=True)
+    dob_date = CharField()
+    dob_age = CharField()
+    dob_untilbirthday = CharField()
 
-    registered_date = CharField(null=True)
-    registered_age = CharField(null=True)
+    registered_date = CharField()
+    registered_age = CharField()
 
-    phone = CharField(null=True)
-    cell = CharField(null=True)
+    phone = CharField()
+    cell = CharField()
 
     id_name = CharField(null=True)
     id_value = CharField(null=True)
 
-    nat = CharField(null=True)
+    nat = CharField()
 
 
 def create_table():
@@ -63,8 +63,8 @@ def delete_table():
     database.drop_tables([Users])
 
 
-def insert_db():
-    for p in parsed_json['results']:
+def insert_db(json):
+    for p in json['results']:
         user = Users(gender=p['gender'],
 
                      name_title=p['name']['title'],
@@ -93,7 +93,7 @@ def insert_db():
 
                      dob_date=p['dob']['date'],
                      dob_age=p['dob']['age'],
-
+                     dob_untilbirthday=p['dob']['untilbirthday'],
                      registered_date=p['registered']['date'],
                      registered_age=p['registered']['age'],
 
@@ -108,6 +108,8 @@ def insert_db():
 
 
 if __name__ == "__main__":
+    file = json_service.get_json()
+
     delete_table()
     create_table()
-    insert_db()
+    insert_db(file)

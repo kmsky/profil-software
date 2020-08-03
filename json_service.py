@@ -18,7 +18,7 @@ def add_days_until_birthday():
     date = day_counter
     for person in parsed_json['results']:
         until_birthday = date.days_between(person['dob']['date'])
-        person['dob']['untilBirthday'] = until_birthday
+        person['dob']['untilbirthday'] = until_birthday
 
 
 def delete_special_char(number):
@@ -38,7 +38,6 @@ def delete_picture():
 
 def get_json():
     return parsed_json
-
 
 
 
