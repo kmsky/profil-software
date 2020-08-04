@@ -1,5 +1,5 @@
 import re
-from day_counter import DayCounter
+from database.day_counter import DayCounter
 
 
 class JSONEditor:

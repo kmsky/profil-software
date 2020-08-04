@@ -1,8 +1,8 @@
 import argparse
-import statistics
+import db_analysis
 
 
-class Args():
+class Args:
     def __init__(self):
         parser = argparse.ArgumentParser()
         parser.add_argument('-percent-fm', action='store_true', dest='percent')
@@ -16,24 +16,19 @@ class Args():
 
     def choose_function(self):
         if self.args.percent is not False:
-            statistics.percent_fm()
+            db_analysis.percent_of_gender()
 
         if self.args.avg is not None:
-            statistics.average_age(self.args.avg)
+            db_analysis.average_age(self.args.avg)
 
         if self.args.city is not None:
-            statistics.most_common_cities(self.args.city)
+            db_analysis.most_common_cities(self.args.city)
 
         if self.args.password is not None:
-            statistics.most_common_password(self.args.password)
+            db_analysis.most_common_password(self.args.password)
 
         if self.args.secure is not False:
-            statistics.find_best_password()
+            db_analysis.most_secure_password()
 
         if self.args.dates is not None:
-            statistics.born_between(self.args.dates[0], self.args.dates[1])
-
-
-if __name__ == "__main__":
-    args = Args()
-    args.choose_function()
+            db_analysis.born_between(self.args.dates[0], self.args.dates[1])

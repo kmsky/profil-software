@@ -1,9 +1,9 @@
 from peewee import *
-from json_editor import JSONEditor
-from json_creator import JSONCreator
+from database.json_editor import JSONEditor
+from database.json_creator import JSONCreator
 
 
-database = SqliteDatabase("persons.db")
+database = SqliteDatabase("./database/persons.db")
 
 
 class BaseModel(Model):
@@ -63,8 +63,8 @@ def delete_table():
     database.drop_tables([Users])
 
 
-def insert_db(json):
-    for p in json['results']:
+def insert_db(json_data):
+    for p in json_data['results']:
         table = Users(gender=p['gender'],
 
                       name_title=p['name']['title'],
