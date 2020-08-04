@@ -1,6 +1,9 @@
 import requests
 import json
 
+# Project uses randomuser.me API
+# https://randomuser.me/
+
 
 class JSONCreator:
 

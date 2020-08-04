@@ -89,7 +89,3 @@ def born_between(date1, date2):
 
     for user in chosen:
         print(user.id, user.name_first, user.name_last)
-
-
-if __name__ == "__main__":
-    most_secure_password()
