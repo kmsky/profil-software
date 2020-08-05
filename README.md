@@ -11,7 +11,7 @@ It was created for the purpose of recruitment for the [Profil Software](https://
 Download and install requirements. Next run `database.py`  to create the database.
 
 ```sh
-$ git clone https://github.com/k_msky/profil-software.git
+$ git clone https://github.com/kmsky/profil-software.git
 $ cd profil-software
 $ pip install -r requirements.txt
 $ python database.py
