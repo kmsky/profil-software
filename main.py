@@ -1,5 +1,5 @@
 import argparse
-import db_analysis
+from analysis import db_analysis
 
 
 class Args:

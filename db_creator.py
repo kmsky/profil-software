@@ -3,7 +3,7 @@ from database.json_editor import JSONEditor
 from database.json_creator import JSONCreator
 
 
-database = SqliteDatabase("./database/persons.db")
+database = SqliteDatabase("./database_b/persons.db")
 
 
 class BaseModel(Model):
@@ -122,6 +122,6 @@ if __name__ == "__main__":
     editor.delete_picture()
     json = editor.get_json()
 
-    # create database
+    # create database_b
     create_table()
     insert_db(json)

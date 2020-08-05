@@ -1,6 +1,6 @@
-from database.database import Users
-from database.database import database as db
-from pass_rating import PassRating
+from db_creator import Users
+from db_creator import database as db
+from analysis.pass_rating import PassRating
 
 
 def percent_of_gender():
@@ -78,7 +78,7 @@ def most_secure_password():
             best_score = new_score
             best_pass = password
 
-    print("Best password in database: " + best_pass)
+    print("Best password in database_b: " + best_pass)
 
 
 def born_between(date1, date2):
