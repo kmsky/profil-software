@@ -3,7 +3,7 @@ from database.json_editor import JSONEditor
 from database.json_creator import JSONCreator
 
 
-database = SqliteDatabase("./database_b/persons.db")
+database = SqliteDatabase("persons.db")
 
 
 class BaseModel(Model):

@@ -1,6 +1,7 @@
 from db_creator import Users
 from db_creator import database as db
 from analysis.pass_rating import PassRating
+from analysis.average_age import AvgAgeCalc
 
 
 def percent_of_gender():
@@ -15,70 +16,27 @@ def percent_of_gender():
 
 
 def average_age(parameter):
-    if parameter == "male":
-        cursor = db.execute_sql("SELECT AVG(dob_age) "
-                                "FROM Users "
-                                "WHERE gender='male'")
-
-        male_age_avg = cursor.fetchone()
-        print("Male age average: " + str(male_age_avg[0]))
-
-    elif parameter == "female":
-        cursor = db.execute_sql("SELECT AVG(dob_age) "
-                                "FROM Users "
-                                "WHERE gender='female'")
-        female_age_avg = cursor.fetchone()
-        print("Female age average: " + str(female_age_avg[0]))
-
-    elif parameter == "overall":
-        cursor = db.execute_sql("SELECT AVG(dob_age) "
-                                "FROM Users;")
-        overall_avg = cursor.fetchone()
-        print("Overall average: " + str(overall_avg[0]))
+    average = AvgAgeCalc(parameter)
+    result = average.calculate()
+    print(result)
 
 
-def most_common_cities(n):
-    cursor = db.execute_sql("SELECT location_city "
-                            "FROM Users "
-                            "GROUP BY location_city "
-                            "ORDER BY COUNT(location_city) DESC "
-                            "LIMIT " + str(n))
-
-    result = cursor.fetchall()
-    for cities in result:
-        for city in cities:
-            print(city)
+def most_common_cities(number_of_results):
+    result = execute_sql_common("location_city", number_of_results)
+    print_most_common(number_of_results, result, "cities")
 
 
-def most_common_password(n):
-    cursor = db.execute_sql("SELECT login_password "
-                            "FROM Users "
-                            "GROUP BY login_password "
-                            "ORDER BY COUNT(location_city) DESC "
-                            "LIMIT " + str(n))
-
-    result = cursor.fetchall()
-    for passwords in result:
-        for password in passwords:
-            print(password)
+def most_common_password(number_of_results):
+    result = execute_sql_common("login_password", number_of_results)
+    print_most_common(number_of_results, result, "passwords")
 
 
 def most_secure_password():
-    best_score = -1
+    passwords = PassRating()
+    passwords.rate_passwords()
+    best_password = passwords.get_best_password()
 
-    query = Users.select(Users.login_password)
-
-    for row in query:
-        password = row.login_password
-
-        rate = PassRating(password)
-        new_score = rate.count_points()
-
-        if new_score > best_score:
-            best_score = new_score
-            best_pass = password
-
-    print("Best password in database_b: " + best_pass)
+    print("Best password in database: " + best_password + "\n")
 
 
 def born_between(date1, date2):
@@ -89,3 +47,24 @@ def born_between(date1, date2):
 
     for user in chosen:
         print(user.id, user.name_first, user.name_last)
+
+
+def execute_sql_common(column, n):
+    cursor = db.execute_sql("SELECT " + column +
+                            " FROM Users "
+                            "GROUP BY " + column +
+                            " ORDER BY COUNT(" + column + ") DESC "
+                                                          "LIMIT " + str(n))
+
+    return cursor.fetchall()
+
+
+def print_most_common(number_of_results, tuples, what_is_it):
+
+    print(str(number_of_results) + " most common " + what_is_it + " :")
+
+    for results in tuples:
+        for single_result in results:
+            print(single_result)
+
+    print("\n")

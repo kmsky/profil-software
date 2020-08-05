@@ -33,7 +33,7 @@ class Args:
             db_analysis.most_secure_password()
 
         if self.args.date is not None:
-            db_analysis.born_between(self.args.dates[0], self.args.dates[1])
+            db_analysis.born_between(self.args.date[0], self.args.date[1])
 
 
 if __name__ == "__main__":
