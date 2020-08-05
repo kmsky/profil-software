@@ -33,3 +33,5 @@ Supported arguments:
 $ python main.py -born-between 1965-10-02 1972-01-12
 ```
 
+### Important
+Some of data is in Persian. To see them in CMD it is necessary to set a font that supports Persian characters, eg `Courier News`.

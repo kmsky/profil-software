@@ -36,7 +36,7 @@ def most_secure_password():
     passwords.rate_passwords()
     best_password = passwords.get_best_password()
 
-    print("Best password in database: " + best_password + "\n")
+    print("The strongest password in database: " + best_password + "\n")
 
 
 def born_between(date1, date2):
