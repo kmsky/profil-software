@@ -8,13 +8,13 @@ It was created for the purpose of recruitment for the [Profil Software](https://
 * Requests library
 
 #### Installation
-Download and install requirements. Next run `database.py`  to create the database.
+Download and install requirements. Next run `db_creator.py`.
 
 ```sh
 $ git clone https://github.com/kmsky/profil-software.git
 $ cd profil-software
 $ pip install -r requirements.txt
-$ python database.py
+$ python db_creator.py
 ```
 
 #### Usage
